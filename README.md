@@ -25,7 +25,7 @@ O intuito deste projeto é colocar em prática os conhecimentos adquiridos ao lo
 Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/ProjetoTarefasPlus.git
+git clone https://github.com/seu-usuario/dalygames.git
 ```
 
 Instale as dependências:

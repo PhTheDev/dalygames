@@ -1,4 +1,5 @@
 import { Container } from "@/components/container";
+import { GameCard } from "@/components/GameCard";
 import { Input } from "@/components/input";
 import { GameProps } from "@/utils/types/game";
 import Image from "next/image";
@@ -13,13 +14,24 @@ async function getDailyGame() {
     );
     return res.json();
   } catch (error) {
-    console.error("Error fetching daily game:", error);
+    console.error("Error fetching daily game:");
     return null;
   }
 }
 
+async function getGames() {
+  try {
+    const res = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=games`, {
+      next: { revalidate: 320 },
+    });
+    return res.json();
+  } catch (error) {
+    throw new Error("Error fetching games:");
+  }
+}
 export default async function Home() {
   const dailyGame: GameProps = await getDailyGame();
+  const games: GameProps[] = await getGames();
 
   if (!dailyGame) {
     return (
@@ -63,7 +75,16 @@ export default async function Home() {
         </Link>
 
         <Input />
-        
+
+        <h2 className="text-lg font-bold text-center mt-8 mb-5">
+          Jogos para conhecer
+        </h2>
+
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {games.map((item) => (
+            <GameCard key={item.id} data={item} />
+          ))}
+        </section>
       </Container>
     </main>
   );

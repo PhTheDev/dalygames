@@ -19,7 +19,7 @@ export function Header() {
               className="w-full"
             />
           </Link>
-          <Link href="/games">Games</Link>
+          <Link href="/">Games</Link>
           <Link href="/profile">Perfil</Link>
         </nav>
 
